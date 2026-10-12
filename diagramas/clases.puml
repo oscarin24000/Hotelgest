@@ -1,0 +1,61 @@
+@startuml
+class Usuario {
+  - id: int
+  - nombre: String
+  - correo: String
+  - contrasena: String
+  + iniciarSesion(): boolean
+}
+
+class Huesped {
+  - documento: String
+  - telefono: String
+  + consultarDisponibilidad(entrada: Date, salida: Date): List<Habitacion>
+  + reservar(habitacion: Habitacion): Reserva
+  + cancelarReserva(reserva: Reserva): void
+}
+
+class Recepcionista {
+  + registrarHuesped(): Huesped
+  + registrarCheckIn(reserva: Reserva): void
+  + registrarCheckOut(reserva: Reserva): Factura
+}
+
+class Administrador {
+  + gestionarHabitaciones(): void
+  + gestionarPersonal(): void
+  + generarReporte(): void
+}
+
+class Habitacion {
+  - numero: int
+  - tipo: String
+  - tarifaNoche: double
+  - estado: String
+  + estaDisponible(entrada: Date, salida: Date): boolean
+}
+
+class Reserva {
+  - id: int
+  - fechaEntrada: Date
+  - fechaSalida: Date
+  - estado: String
+  + calcularNoches(): int
+}
+
+class Factura {
+  - id: int
+  - total: double
+  - fechaEmision: Date
+  + calcularTotal(): double
+}
+
+Usuario <|-- Huesped
+Usuario <|-- Recepcionista
+Usuario <|-- Administrador
+
+Huesped "1" -- "0..*" Reserva
+Habitacion "1" -- "0..*" Reserva
+Recepcionista "1" -- "0..*" Reserva : atiende
+Reserva "1" -- "0..1" Factura : genera
+@enduml

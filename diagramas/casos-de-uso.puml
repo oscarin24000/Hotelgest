@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+actor Huesped
+actor Recepcionista
+actor Administrador
+
+rectangle HotelGest {
+  usecase "Iniciar sesión" as UC1
+  usecase "Consultar disponibilidad" as UC2
+  usecase "Reservar habitación" as UC3
+  usecase "Cancelar reserva" as UC4
+  usecase "Ver mi factura" as UC5
+  usecase "Registrar huésped" as UC6
+  usecase "Registrar check-in" as UC7
+  usecase "Registrar check-out" as UC8
+  usecase "Generar factura" as UC9
+  usecase "Gestionar habitaciones" as UC10
+  usecase "Gestionar personal y tarifas" as UC11
+  usecase "Generar reportes" as UC12
+}
+
+Huesped --> UC1
+Huesped --> UC2
+Huesped --> UC3
+Huesped --> UC4
+Huesped --> UC5
+
+Recepcionista --> UC1
+Recepcionista --> UC6
+Recepcionista --> UC3
+Recepcionista --> UC4
+Recepcionista --> UC7
+Recepcionista --> UC8
+
+Administrador --> UC1
+Administrador --> UC10
+Administrador --> UC11
+Administrador --> UC12
+
+UC3 .> UC2 : <<include>>
+UC8 .> UC9 : <<include>>
+@enduml

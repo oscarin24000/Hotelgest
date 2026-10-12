@@ -1,0 +1,23 @@
+@startuml
+actor Huesped
+participant "Interfaz" as UI
+participant "ServicioReserva" as SR
+participant "Habitacion" as H
+database "BaseDatos" as BD
+
+Huesped -> UI : elige fechas y tipo de habitación
+UI -> SR : crearReserva(huesped, habitacion, fechas)
+SR -> BD : consultar habitación y reservas existentes
+BD --> SR : datos
+SR -> H : estaDisponible(entrada, salida)
+H --> SR : true / false
+
+alt habitación disponible
+  SR -> BD : guardar reserva
+  SR --> UI : reserva confirmada
+  UI --> Huesped : muestra código y valor de la reserva
+else habitación no disponible
+  SR --> UI : error: sin disponibilidad
+  UI --> Huesped : sugiere otras fechas o habitaciones
+end
+@enduml
