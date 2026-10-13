@@ -16,7 +16,7 @@ huéspedes, reservas, check-in/check-out y facturación.
 
 ## Problema
 
-El hotel lleva las reservas y los huéspedes en cuadernos o en hojas de Excel.
+El hotel lleva las reservas de los huéspedes en cuadernos o en hojas de Excel.
 Esto causa reservas duplicadas, poca claridad sobre qué habitaciones están
 libres u ocupadas, facturas hechas a mano con errores y falta de información
 sobre la ocupación.
