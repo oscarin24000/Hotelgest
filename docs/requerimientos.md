@@ -8,7 +8,7 @@
 
 | Código | Requerimiento |
 
-|---|---|
+
 
 | RF1 | El sistema debe permitir iniciar sesión según el rol (huésped, recepcionista, administrador). |
 
@@ -36,7 +36,6 @@
 
 | Código | Tipo | Requerimiento |
 
-|---|---|---|
 
 | RNF1 | Usabilidad | La interfaz debe ser sencilla para que el recepcionista la aprenda rápido. |
 
