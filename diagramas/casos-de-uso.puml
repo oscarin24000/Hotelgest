@@ -1,42 +1,66 @@
 @startuml
 left to right direction
-actor Huesped
-actor Recepcionista
-actor Administrador
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #DDEEFF
+  BorderColor #14213D
+  ArrowColor #14213D
+}
+skinparam actor {
+  BackgroundColor #FFF2CC
+  BorderColor #14213D
+}
+title Diagrama de casos de uso - HotelGest
 
-rectangle HotelGest {
+actor "Usuario" as U
+actor "Huésped" as H
+actor "Recepcionista" as R
+actor "Administrador" as A
+
+U <|-- H
+U <|-- R
+U <|-- A
+
+rectangle "Sistema HotelGest" {
   usecase "Iniciar sesión" as UC1
-  usecase "Consultar disponibilidad" as UC2
-  usecase "Reservar habitación" as UC3
-  usecase "Cancelar reserva" as UC4
-  usecase "Ver mi factura" as UC5
-  usecase "Registrar huésped" as UC6
-  usecase "Registrar check-in" as UC7
-  usecase "Registrar check-out" as UC8
-  usecase "Generar factura" as UC9
-  usecase "Gestionar habitaciones" as UC10
-  usecase "Gestionar personal y tarifas" as UC11
-  usecase "Generar reportes" as UC12
+
+  package "Reservas" {
+    usecase "Consultar disponibilidad" as UC2
+    usecase "Reservar habitación" as UC3
+    usecase "Cancelar reserva" as UC4
+  }
+
+  package "Estadía y facturación" {
+    usecase "Registrar huésped" as UC5
+    usecase "Registrar check-in" as UC6
+    usecase "Registrar check-out" as UC7
+    usecase "Generar factura" as UC8
+    usecase "Ver mi factura" as UC9
+  }
+
+  package "Administración" {
+    usecase "Gestionar habitaciones" as UC10
+    usecase "Gestionar personal y tarifas" as UC11
+    usecase "Generar reportes" as UC12
+  }
 }
 
-Huesped --> UC1
-Huesped --> UC2
-Huesped --> UC3
-Huesped --> UC4
-Huesped --> UC5
+U --> UC1
+H --> UC2
+H --> UC3
+H --> UC4
+H --> UC9
+R --> UC3
+R --> UC4
+R --> UC5
+R --> UC6
+R --> UC7
+A --> UC10
+A --> UC11
+A --> UC12
 
-Recepcionista --> UC1
-Recepcionista --> UC6
-Recepcionista --> UC3
-Recepcionista --> UC4
-Recepcionista --> UC7
-Recepcionista --> UC8
-
-Administrador --> UC1
-Administrador --> UC10
-Administrador --> UC11
-Administrador --> UC12
-
-UC3 .> UC2 : <<include>>
-UC8 .> UC9 : <<include>>
+UC3 ..> UC2 : <<include>>
+UC7 ..> UC8 : <<include>>
+UC5 ..> UC6 : <<extend>>\nsi el huésped es nuevo
 @enduml
